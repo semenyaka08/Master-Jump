@@ -1,6 +1,8 @@
 using System.Drawing;
+using Master_Jump.Abstractions;
 using Master_Jump.Abstractions.Implementations;
 using Master_Jump.Models.Interfaces;
+using Master_Jump.Properties;
 
 namespace Master_Jump.Models
 {
@@ -14,13 +16,13 @@ namespace Master_Jump.Models
 
         public Model Model { get; set; }
 
-        public Player()
+        public Player(Model model, PlayerPhysics physics)
         {
-            Sprite = Properties.Resources.man;
+            Sprite = Resources.man;
             
-            Model = new Model(new Point(100, 350), new Size(40,40));
+            Model = model;
 
-            Physics = new PlayerPhysics(Model);
+            Physics = physics;
         }
         
         public void DrawUnit(Graphics graphics)

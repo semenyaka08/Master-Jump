@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
+using Master_Jump.Abstractions.Implementations;
 using Master_Jump.Controllers;
 using Master_Jump.Models;
 using Master_Jump.Properties;
@@ -17,8 +18,12 @@ namespace Master_Jump
         private float _offset;
 
         private float _localOffset;
+
+        private static readonly Model PlayerModel = new Model(new Point(100, 350), new Size(40,40));
         
-        private static readonly Player Player = new Player();
+        private static readonly PlayerPhysics PlayerPhysics = new PlayerPhysics(PlayerModel);
+        
+        private static readonly Player Player = new Player(PlayerModel, PlayerPhysics);
         
         private readonly Timer _timer = new Timer();
         
@@ -32,6 +37,7 @@ namespace Master_Jump
             KeyDown += OnKeyBoardPressed;
             KeyUp += OnKeyBoardUp;
             Paint += DrawModels;
+            MouseClick += OnMouseButtonPressed;
             typeof(Panel).InvokeMember("DoubleBuffered", System.Reflection.BindingFlags.SetProperty |
                                                          System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic, null, panel1, new object[] { true });
         }
@@ -49,6 +55,11 @@ namespace Master_Jump
             foreach (var t in PlatformController.Platforms)
             {
                 t.DrawPlatform(graphics);
+            }
+
+            foreach (var bullet in BulletController.Bullets)
+            {
+                bullet.DrawBullet(graphics);
             }
             Player.DrawUnit(graphics);
         }
@@ -70,6 +81,11 @@ namespace Master_Jump
                     Player.Sprite = Resources.man;
                     break;
             }
+        }
+        private static void OnMouseButtonPressed(object sender, MouseEventArgs eventArgs)
+        {
+            BulletController.GenerateBullet(Player.Model);
+            Player.Sprite = Resources.man_shooting;
         }
         private void Update(object sender, EventArgs eventArgs)
         {
