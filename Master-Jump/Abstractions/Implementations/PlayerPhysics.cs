@@ -50,7 +50,6 @@ namespace Master_Jump.Abstractions.Implementations
                 platform.Sprite = Resources.brokenplatform2;
                 platform.IsTouched = true;
                 
-                
                 ThreadStart collector = Form1.MoveBrokenPlatforms;
                 Thread moving = new Thread(collector);
                 moving.Start();

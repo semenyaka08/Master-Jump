@@ -1,3 +1,7 @@
+using System.Threading;
+using System.Threading.Tasks;
+using Master_Jump.Controllers;
+
 namespace Master_Jump.Abstractions.Implementations
 {
     public class BulletPhysics : Physics
@@ -9,7 +13,13 @@ namespace Master_Jump.Abstractions.Implementations
 
         public override bool CalculatePhysics()
         {
-            throw new System.NotImplementedException();
+            while (Model.Coordinates.Y > 50)
+            {
+                Model.Coordinates.Y -= 10;
+                Thread.Sleep(10);
+            }
+            BulletController.ClearBullet();
+            return true;
         }
 
         protected override bool CollisionCheck()
