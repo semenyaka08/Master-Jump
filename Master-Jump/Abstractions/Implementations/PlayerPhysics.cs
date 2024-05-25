@@ -20,7 +20,7 @@ namespace Master_Jump.Abstractions.Implementations
             Force = 0.35f;
         }
 
-        public override bool CalculatePhysics()
+        public override bool CalculatePhysics(params object[] args) //It should get zero parameters
         {
             Model.Coordinates.X += XCoords;
             

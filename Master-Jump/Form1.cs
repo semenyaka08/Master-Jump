@@ -82,9 +82,10 @@ namespace Master_Jump
                     break;
             }
         }
-        private static void OnMouseButtonPressed(object sender, MouseEventArgs eventArgs)
+        private void OnMouseButtonPressed(object sender, MouseEventArgs eventArgs)
         {
-            BulletController.GenerateBullet(Player.Model);
+            var cursorPosition = PointToClient(Cursor.Position);
+            BulletController.GenerateBullet(Player.Model, cursorPosition);
             Player.Sprite = Resources.man_shooting;
         }
         private void Update(object sender, EventArgs eventArgs)

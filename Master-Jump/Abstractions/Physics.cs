@@ -1,3 +1,4 @@
+
 namespace Master_Jump.Abstractions
 {
     public abstract class Physics
@@ -9,8 +10,8 @@ namespace Master_Jump.Abstractions
             Model = model;
         }
 
-        public abstract bool CalculatePhysics();
-
+        public abstract bool CalculatePhysics(params object[] args);
+        
         protected abstract bool CollisionCheck();
     }
     

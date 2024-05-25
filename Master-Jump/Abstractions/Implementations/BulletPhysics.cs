@@ -1,6 +1,8 @@
+using System;
+using System.Drawing;
 using System.Threading;
-using System.Threading.Tasks;
 using Master_Jump.Controllers;
+
 
 namespace Master_Jump.Abstractions.Implementations
 {
@@ -11,20 +13,39 @@ namespace Master_Jump.Abstractions.Implementations
             
         }
 
-        public override bool CalculatePhysics()
+        public override bool CalculatePhysics(params object[] args)   //It should get 1 parameter, PointF end
         {
-            while (Model.Coordinates.Y > 50)
+            if (!(args[0] is PointF end))
             {
-                Model.Coordinates.Y -= 10;
-                Thread.Sleep(10);
+                return false;
             }
+            CalculateSplitPoint(ref Model.Coordinates, ref end);
             BulletController.ClearBullet();
             return true;
         }
 
+        private void CalculateSplitPoint(ref PointF start, ref PointF end)
+        {
+            double distance = Math.Sqrt(Math.Pow(end.X - start.X, 2) + Math.Pow(end.Y - start.Y, 2));
+            const int step = 10;
+            
+            double abx = end.X - start.X;
+            double aby = end.Y - start.Y;
+            
+            double stepX = (abx / distance) * step;
+            double stepY = (aby / distance) * step;
+            
+            while (start.X >= 0 && end.X <= 330)
+            {
+                start.X += (float)stepX;
+                start.Y += (float)stepY;
+                Thread.Sleep(10);
+            }
+        }
+        
         protected override bool CollisionCheck()
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }
