@@ -13,7 +13,7 @@ namespace Master_Jump.Abstractions.Implementations
             
         }
 
-        public override bool CalculatePhysics(params object[] args)   //It should get 1 parameter, PointF end
+        public override bool CalculatePhysics(params object[] args)   //It should get 1 parameter, PointF 
         {
             if (!(args[0] is PointF end))
             {

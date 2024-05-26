@@ -1,4 +1,5 @@
 using System.Drawing;
+using Master_Jump.Abstractions;
 using Master_Jump.Abstractions.Implementations;
 
 namespace Master_Jump.Models.Interfaces
@@ -7,7 +8,7 @@ namespace Master_Jump.Models.Interfaces
     {
         Image Sprite { get; set; }
         
-        PlayerPhysics Physics { get; set; }
+        Physics Physics { get; set; }
         
         Model Model { get; set; }
         

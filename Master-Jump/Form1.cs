@@ -66,18 +66,20 @@ namespace Master_Jump
         
         private static void OnKeyBoardUp(object sender, KeyEventArgs eventArgs)
         {
-            Player.Physics.XCoords = 0;
+            if (Player.Physics is PlayerPhysics playerPhysics)
+                playerPhysics.XCoords = 0;
         }
         private static void OnKeyBoardPressed(object sender, KeyEventArgs eventArgs)
         {
+            if (!(Player.Physics is PlayerPhysics playerPhysics)) return;
             switch (eventArgs.KeyCode)
             {
                 case Keys.Right:
-                    Player.Physics.XCoords = 6;
+                    playerPhysics.XCoords = 6;
                     Player.Sprite = Resources.man2;
                     break;
                 case Keys.Left:
-                    Player.Physics.XCoords = -6;
+                    playerPhysics.XCoords = -6;
                     Player.Sprite = Resources.man;
                     break;
             }

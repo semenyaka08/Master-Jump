@@ -12,7 +12,7 @@ namespace Master_Jump.Models
         
         public bool IsFalling { get; set; }
         
-        public PlayerPhysics Physics { get; set; }
+        public Physics Physics { get; set; }
 
         public Model Model { get; set; }
 
