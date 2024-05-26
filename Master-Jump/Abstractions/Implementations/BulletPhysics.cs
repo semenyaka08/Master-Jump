@@ -1,7 +1,10 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Threading;
 using Master_Jump.Controllers;
+using Master_Jump.Models;
+using Master_Jump.Models.Interfaces;
 
 
 namespace Master_Jump.Abstractions.Implementations
@@ -20,7 +23,6 @@ namespace Master_Jump.Abstractions.Implementations
                 return false;
             }
             CalculateSplitPoint(ref Model.Coordinates, ref end);
-            BulletController.ClearBullet();
             return true;
         }
 
@@ -39,13 +41,28 @@ namespace Master_Jump.Abstractions.Implementations
             {
                 start.X += (float)stepX;
                 start.Y += (float)stepY;
+                CollisionCheck();
                 Thread.Sleep(10);
             }
         }
         
         protected override bool CollisionCheck()
         {
-            throw new NotImplementedException();
+            foreach (var enemy in EnemyController.Enemies.Where(enemy => Model.Coordinates.X >= enemy.Model.Coordinates.X &&
+                                                                         Model.Coordinates.X <= enemy.Model.Coordinates.X + enemy.Model.Size.Width &&
+                                                                         Model.Coordinates.Y >= enemy.Model.Coordinates.Y &&
+                                                                         Model.Coordinates.Y <= enemy.Model.Coordinates.Y + enemy.Model.Size.Height))
+            {
+                IBullet bullet = BulletController.Bullets.First(p => p.Model == Model);
+
+                if (enemy is Enemy enemy1 && bullet is Bullet bullet1)
+                {
+                    enemy1.IsTouched = true;
+                    bullet1.IsTouched = true;
+                }
+            }
+
+            return false;
         }
     }
 }

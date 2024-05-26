@@ -28,7 +28,7 @@ namespace Master_Jump.Controllers
         
         public static void ClearBullet()
         {
-            Bullets.RemoveAll(p => p.Model.Coordinates.X <= 10 || p.Model.Coordinates.X >= 320);
+            Bullets.RemoveAll(p => p.Model.Coordinates.X <= 10 || p.Model.Coordinates.X >= 320 || (p is Bullet bullet && bullet.IsTouched));
         }
     }
 }

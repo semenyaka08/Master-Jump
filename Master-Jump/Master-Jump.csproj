@@ -47,9 +47,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstractions\Implementations\BulletPhysics.cs" />
+    <Compile Include="Abstractions\Implementations\EnemyPhysics.cs" />
     <Compile Include="Abstractions\Implementations\PlayerPhysics.cs" />
     <Compile Include="Abstractions\Physics.cs" />
     <Compile Include="Controllers\BulletController.cs" />
+    <Compile Include="Controllers\EnemyController.cs" />
     <Compile Include="Controllers\PlatformController.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -61,7 +63,7 @@
     <Compile Include="Models\BasePlatform.cs" />
     <Compile Include="Models\BrokenPlatform.cs" />
     <Compile Include="Models\Bullet.cs" />
-    <Compile Include="Models\EnemyUnit.cs" />
+    <Compile Include="Models\Enemy.cs" />
     <Compile Include="Models\Interfaces\IBaseUnit.cs" />
     <Compile Include="Models\Interfaces\IBullet.cs" />
     <Compile Include="Models\Interfaces\IPlatform.cs" />

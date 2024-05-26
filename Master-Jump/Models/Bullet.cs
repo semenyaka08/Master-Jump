@@ -7,6 +7,9 @@ namespace Master_Jump.Models
 {
     public class Bullet : IBullet
     {
+        
+        public bool IsTouched { get; set; }
+
         public Image Sprite { get; set; }
         public Model Model { get; set; }
         
@@ -14,6 +17,8 @@ namespace Master_Jump.Models
 
         public Bullet(Model model, BulletPhysics bulletPhysics)
         {
+            IsTouched = false;
+            
             Sprite = Resources.bullet;
             
             Model = model;

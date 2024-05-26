@@ -38,6 +38,15 @@ namespace Master_Jump.Controllers
             int y = 90;
             Point position = new Point(x, _startYPosition - y);
             AddPlatform(new BasePlatform(position));
+            
+            int enemyChance = random.Next(0, 100);
+            if (enemyChance > 80)
+            {
+                position.X += 10;
+                position.Y -= 38;
+                EnemyController.GenerateEnemy(new Model(position, new SizeF(40,40)));
+            }
+            
             int brokenChance = random.Next(0, 100);
             if (brokenChance>30) return;
             GenerateBrokenPlatform(x);

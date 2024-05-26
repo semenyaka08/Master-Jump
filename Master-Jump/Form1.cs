@@ -61,6 +61,11 @@ namespace Master_Jump
             {
                 bullet.DrawBullet(graphics);
             }
+
+            foreach (var enemy in EnemyController.Enemies)
+            {
+                enemy.DrawUnit(graphics);
+            }
             Player.DrawUnit(graphics);
         }
         
@@ -103,13 +108,18 @@ namespace Master_Jump
                     {
                         platform.Model.Coordinates.Y -= 8;
                     }
+                    foreach (var enemy in EnemyController.Enemies)
+                    {
+                        enemy.Model.Coordinates.Y -= 8;
+                    }
                     PlatformController.ClearPlatforms();
                     Invalidate();
                     return;
                 }
             }
             PlatformController.ClearPlatforms();
-            
+            EnemyController.ClearEnemy();
+            BulletController.ClearBullet();
             bool isTouched = Player.Physics.CalculatePhysics();
             
             if (isTouched)
@@ -134,9 +144,12 @@ namespace Master_Jump
             label1.Text = _score.ToString();
             foreach (var platform in PlatformController.Platforms)
             {
-                var coordinates = platform.Model.Coordinates;
-                coordinates.Y += offset;
-                platform.Model.Coordinates = coordinates;
+                platform.Model.Coordinates.Y += offset;
+            }
+
+            foreach (var enemy in EnemyController.Enemies)
+            {
+                enemy.Model.Coordinates.Y += offset;
             }
         }
         public static void MoveBrokenPlatforms()
