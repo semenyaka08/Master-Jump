@@ -36,6 +36,8 @@ namespace Master_Jump.Abstractions.Implementations
 
         protected override bool CollisionCheck()
         {
+            if (EnemyClash())
+                return true;
             foreach (var platform in from platform in PlatformController.Platforms where Model.Coordinates.X + Model.Size.Width / 2 + 10 >= platform.Model.Coordinates.X && Model.Coordinates.X + Model.Size.Width/2 - 10 <= platform.Model.Coordinates.X + platform.Model.Size.Width where Model.Coordinates.Y + Model.Size.Height >= platform.Model.Coordinates.Y && Model.Coordinates.Y + Model.Size.Height <= platform.Model.Coordinates.Y + platform.Model.Size.Height where Gravity > 0 select platform)
             {
                 if (!(platform is BrokenPlatform))
@@ -53,6 +55,26 @@ namespace Master_Jump.Abstractions.Implementations
                 ThreadStart collector = Form1.MoveBrokenPlatforms;
                 Thread moving = new Thread(collector);
                 moving.Start();
+            }
+
+            return false;
+        }
+
+        private bool EnemyClash()
+        {
+            foreach (var enemy in EnemyController.Enemies)
+            {
+                bool collisionX = Model.Coordinates.X < enemy.Model.Coordinates.X + enemy.Model.Size.Width - 15 &&
+                                  Model.Coordinates.X + Model.Size.Width > enemy.Model.Coordinates.X + 5;
+                
+                bool collisionY = Model.Coordinates.Y < enemy.Model.Coordinates.Y + enemy.Model.Size.Height - 15 &&
+                                  Model.Coordinates.Y + Model.Size.Height > enemy.Model.Coordinates.Y;
+                
+                if (collisionX && collisionY)
+                {
+                    Form1.Player.IsFalling = true;
+                    return Form1.Player.IsFalling;
+                }
             }
 
             return false;

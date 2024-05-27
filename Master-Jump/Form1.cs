@@ -23,7 +23,7 @@ namespace Master_Jump
         
         private static readonly PlayerPhysics PlayerPhysics = new PlayerPhysics(PlayerModel);
         
-        private static readonly Player Player = new Player(PlayerModel, PlayerPhysics);
+        public static readonly Player Player = new Player(PlayerModel, PlayerPhysics);
         
         private readonly Timer _timer = new Timer();
         

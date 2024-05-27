@@ -9,8 +9,8 @@ namespace Master_Jump.Models
     public class Player : IBaseUnit
     {
         public Image Sprite { get; set; }
-        
-        public bool IsFalling { get; set; }
+
+        public bool IsFalling { get; set; } 
         
         public Physics Physics { get; set; }
 

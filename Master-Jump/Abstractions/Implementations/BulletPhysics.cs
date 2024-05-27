@@ -53,9 +53,9 @@ namespace Master_Jump.Abstractions.Implementations
                                                                          Model.Coordinates.Y >= enemy.Model.Coordinates.Y &&
                                                                          Model.Coordinates.Y <= enemy.Model.Coordinates.Y + enemy.Model.Size.Height))
             {
-                IBullet bullet = BulletController.Bullets.First(p => p.Model == Model);
+                IBullet bullet = BulletController.Bullets.FirstOrDefault(p => p.Model == Model);
 
-                if (enemy is Enemy enemy1 && bullet is Bullet bullet1)
+                if (bullet!= null && enemy is Enemy enemy1 && bullet is Bullet bullet1)
                 {
                     enemy1.IsTouched = true;
                     bullet1.IsTouched = true;
