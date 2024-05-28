@@ -133,6 +133,7 @@ namespace Master_Jump
 
             if (Player.IsFalling)
             {
+                _offset = -1;
                 Player.IsFalling = false;
                 InitRestartButton();
             }
@@ -143,12 +144,12 @@ namespace Master_Jump
             
             bool isTouched = Player.Physics.CalculatePhysics();
             
-            if (isTouched)
+            if (isTouched )
             {
                 _offset = 400 - Player.Model.Coordinates.Y;
                 _localOffset = _offset / 23;
             }
-            if (_offset>0)
+            if (_offset>0 )
             {
                 _offset -= _localOffset;
                 TrackPlayer(_localOffset);
