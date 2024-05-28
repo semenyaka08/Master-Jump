@@ -10,7 +10,7 @@ namespace Master_Jump.Controllers
     {
         public static readonly List<IPlatform> Platforms = new List<IPlatform>();
 
-        private static int _startYPosition = 400;
+        public static int _startYPosition = 400;
 
         private static void AddPlatform(IPlatform platform)
         {
